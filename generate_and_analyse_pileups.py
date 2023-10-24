@@ -1,6 +1,11 @@
 # coding: utf-8
 
 
+# this script generates pileup data from a variant and sequencing data using the pileup_on_1_pos.sh script relying on samtools
+# is is used to merge data across samples and can export tables and plots
+# it is centerd on the variant class that contains functions to generate and analyse the pileup data
+# it is best used with a parser that reads a file containing multiples variants and generates a variant object for each variant
+
 import pandas as pd
 import os
 from collections import defaultdict
@@ -11,14 +16,6 @@ import pyparsing as pp
 from pyparsing import pyparsing_common
 import matplotlib.pyplot as plt
 import subprocess
-
-
-# ce script génère une classe correspondant à une variation qui contient des infos, ainsi qu'un fichier pileup
-# le fichier pileup est préalablement avec le script pileup_on_1_pos.sh, génère un header et un pileup en une seule ligne avec des colonnes count, value et quality pour tous les samples
-# la classe variant contient des méthodes pour parser le fichier pileup, faire des calculs et exporter des fichiers text et des plots
-
-# pileup_folder="/storage/store-05/Scratch/Francois/smmips/pileup/test_on_exomes/pileup/"
-# variants_file="/storage/store-05/Scratch/Francois/smmips/pileup/variants_pools_patients_design_with_header_with_alt_allele_edit_subset_66_exomes_edit.csv"
 
 class variant:
     def __init__(self, var_id=None, pileup_chr=None, pileup_pos=None, pileup_alt=None, proband_id=None, father_id=None, mother_id=None, pileup_validated=False, bam_list=None, pileup_file=None, script_generate_1_pileup=None, ref_genome=None):
